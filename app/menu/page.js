@@ -1,11 +1,11 @@
-// import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma";
 
 const loadProducts = async () => {
   // const res = await fetch("http://localhost:3000/api/products", {
   //   cache: "no-store",
   // });
 
-//   return await prisma.products.findMany();
+  return await prisma.products.findMany();
 };
 export const revalidate = 30;
 const Menu = async () => {
@@ -16,7 +16,7 @@ const Menu = async () => {
       <h1 className="p-4 text-center">Bienvenidos al Menú</h1>
       <div className="flex flex-col items-center">
         
-        {/* {data.map((product, index)=>(
+        {data.map((product, index)=>(
         
             <div key={product.id} className="grid gap-2  grid-cols-3 w-[80%] ">
              <div className=" ">{product.name}</div>
@@ -26,7 +26,7 @@ const Menu = async () => {
               
            
         
-        ))} */}
+        ))}
       </div>
      
     </div>
