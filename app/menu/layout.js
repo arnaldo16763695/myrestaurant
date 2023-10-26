@@ -13,7 +13,7 @@ const loadCategories = async () => {
 
 const layoutMenu = async ({ children }) => {
   const data = await loadCategories();
-  console.log(data);
+  // console.log(data);
   return (
     <div>
       <h1 className="text-center text-2xl p-4">Menú del Día</h1>

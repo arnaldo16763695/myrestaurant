@@ -1,25 +1,32 @@
-const Page = ({ params }) => {
-    let product = ""
-       if (params.id==='2') {
-        product = "Suchi"
-       }else if(params.id==='3'){
-        product = "Bebidas"
-       }else{
-        product= "Snack"
-       }
-    
-      return (
-        <div className="flex justify-center ">
-          <ul className="  mx-6">
-            <li>{`${product} ........................................10$ `}</li>
-            <li>{`${product} ........................................10$ `}</li>
-            <li>{`${product} ........................................10$ `}</li>
-            <li>{`${product} ........................................10$ `}</li>
-            <li>{`${product} ........................................10$ `}</li>
-          </ul>
+import { prisma } from "@/app/lib/prisma";
+
+const Page = async ({ params }) => {
+  const getProduct = async () => {
+    return await prisma.products.findMany({
+      where: {
+        categoryId: parseInt(params.id),
+      },
+    })
+  }
+  const data = await getProduct();
+  console.log(data)
+ 
+  return (
+    <div className="flex flex-col justify-center border w-[80%] lg:w-[60%] mx-auto ">
+      
+      {
+        data.map((product)=>(
+        <div key={product.id} className="pl-1 flex hover:bg-slate-100">
+          <div className="w-[90%] border"> ✔  {product.name}</div>
+          
+          <div  className="w-[10%] border text-center">{product.price} $</div>
         </div>
-      );
-    };
-    
-    export default Page;
-    
+        ))
+      }
+        
+      
+    </div>
+  );
+};
+
+export default Page;
