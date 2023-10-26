@@ -8,7 +8,7 @@ const Form = () => {
     >
       <div className="my-4">
         <label
-          for="name"
+          htmlFor="name"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
           Producto
@@ -25,7 +25,7 @@ const Form = () => {
       </div>
       <div className="my-4">
         <label
-          for="category"
+          htmlFor="category"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
           Categoría
@@ -47,7 +47,7 @@ const Form = () => {
 
       <div className="my-4">
         <label
-          for="price"
+          htmlFor="price"
           className="block text-sm font-medium leading-6 text-gray-900"
         >
           Precio

@@ -1,4 +1,4 @@
-import { prisma } from "@/app/lib/prisma";
+import { prisma } from "@/app/lib/prisma"; 
 
 const loadProducts = async () => {
   // const res = await fetch("http://localhost:3000/api/products", {
@@ -9,6 +9,7 @@ const loadProducts = async () => {
 
    return await prisma.products.findMany();
 };
+
 export const revalidate = 60;
 const Menu = async () => {
    const data = await loadProducts();
