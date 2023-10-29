@@ -1,5 +1,6 @@
 import { prisma } from "@/app/lib/prisma"; 
 
+
 const loadProducts = async () => {
   // const res = await fetch("http://localhost:3000/api/products", {
   //   cache: "no-store",
@@ -14,6 +15,8 @@ export const revalidate = 60;
 const Menu = async () => {
    const data = await loadProducts();
    console.log(data);
+   
+   
   return (
     <div className="">
       <h1 className="p-4 text-center">Bienvenidos al Menú</h1>

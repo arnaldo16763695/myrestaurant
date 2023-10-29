@@ -17,7 +17,7 @@ export async function POST(request) {
   if (name.trim() === "") {
     return NextResponse.json("no puede haber datos vacios");
   }
-  const newCategory = await prisma.categories.create({
+  const newCategory = await prisma.cat.create({
     data: {
       name,
       active,
