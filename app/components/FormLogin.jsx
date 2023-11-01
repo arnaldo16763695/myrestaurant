@@ -5,12 +5,13 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 const FormLogin = () => {
   const [messageInputEmpty, setMessageInputEmpty] = useState("");
+  const [authError, setAuthError] = useState('');
   const [data, setData] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
     if (data.email.trim() === "" || data.password.trim() === "") {
       setMessageInputEmpty("Todos los campos son requeridos");
@@ -18,16 +19,33 @@ const FormLogin = () => {
         setMessageInputEmpty("");
       }, 3000);
     }
-    signIn("credentials", {
-      ...data,
-      redirect: false
-    });
-    router.push('/about')    
+
+    try {
+      const signResponse = await signIn("credentials", {
+        ...data,
+        redirect: false
+      });
+      if (!signResponse.ok) {
+        throw { message: "Usuario o contraseña incorrectos" }
+      }
+    } catch (error) {
+      setAuthError(error.message)
+      setTimeout(() => {
+        setAuthError('')
+      }, 3000)
+      return;
+      console.log(error.message)
+    }
+
+    router.push('/about')
   };
   return (
     <form className="space-y-6" onSubmit={loginUser}>
       {messageInputEmpty && (
         <p className="text-sm text-red-600">{messageInputEmpty}</p>
+      )}
+      {authError && (
+        <p className="text-sm text-red-600">{authError}</p>
       )}
       <div>
         <label

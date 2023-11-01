@@ -1,6 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 import { useState } from "react";
 
 const FormRegister = () => {
@@ -46,8 +47,13 @@ const FormRegister = () => {
         },
         body: JSON.stringify(data),
       });
-      const userInfo = await res.json();
-      console.log(userInfo);
+      
+      // automatically signIn      
+      // const resAuth = await signIn('credentials', {
+      //   email: data.email,
+      //   password: data.password
+      // }, redirect: false)
+
     } catch (error) {
       console.log(error);
     }
@@ -55,8 +61,8 @@ const FormRegister = () => {
   return (
     <form className="space-y-6" onSubmit={registerUser}>
       {messageInputEmpty && (
-            <p className="text-sm text-red-600">{messageInputEmpty}</p>
-          )}
+        <p className="text-sm text-red-600">{messageInputEmpty}</p>
+      )}
       <div>
         <label
           htmlFor="name"

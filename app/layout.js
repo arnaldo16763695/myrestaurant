@@ -13,8 +13,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Provider>
         <body className={``}>
+      <Provider>
           <main className="container mx-auto  min-h-screen ">
             <header className="flex justify-around">
               <NavBarMain />
@@ -22,8 +22,8 @@ export default function RootLayout({ children }) {
             <main>{children}</main>
             <footer></footer>
           </main>
-        </body>
       </Provider>
+        </body>
     </html>
   );
 }

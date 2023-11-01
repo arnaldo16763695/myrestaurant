@@ -7,7 +7,8 @@ import { useSession, signIn, signOut } from "next-auth/react"
 
 const NavBarMain = () => {
   const [showMenuMobile, setShowMenuMobile] = useState(false);
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+  console.log(session, status )
   return (
     <nav className="bg-gray-800 w-full">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -65,7 +66,7 @@ const NavBarMain = () => {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
-              <Logo/>
+              <Logo />
             </div>
             <div className="hidden sm:ml-6 sm:block w-full">
               <div className="flex space-x-4 justify-end text-right">
@@ -74,6 +75,7 @@ const NavBarMain = () => {
                   href="/"
                   className=" text-white rounded-md px-3 py-2 text-sm font-medium"
                   aria-current="page"
+                  
                 >
                   Home
                 </Link>
@@ -99,7 +101,7 @@ const NavBarMain = () => {
                 </Link>
 
                 {session && <button className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" onClick={() => signOut()}>Sign Out</button>}
-                {!session && <Link href={'/login'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium" >Sign in</Link>}
+                {!session && <Link href={'/login'} className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Sign in</Link>}
 
               </div>
             </div>
