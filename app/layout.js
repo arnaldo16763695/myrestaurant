@@ -1,7 +1,7 @@
 // import { Inter } from "next/font/google";
 import "./globals.css";
-import NavBarMain from "./components/NavBarMain";
 import Provider from "./context/Providers";
+import NavBar from "./components/NavBar";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -15,9 +15,10 @@ export default function RootLayout({ children }) {
     <html lang="en">
         <body className={``}>
       <Provider>
-          <main className="container mx-auto  min-h-screen ">
+          <main className=" mx-auto  min-h-screen ">
             <header className="flex justify-around">
-              <NavBarMain />
+              {/* <NavBarMain /> */}
+              <NavBar/>
             </header>
             <main>{children}</main>
             <footer></footer>
