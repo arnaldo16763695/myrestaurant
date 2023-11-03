@@ -9,17 +9,33 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const { name, active, price, categoryId } = await request.json();
-  if (name.trim() === "") {
-    return NextResponse.json("no puede haber datos vacios");
+  const { name, price, categoryId } = await request.json();
+  console.log(name, price, categoryId)
+  if (name.trim() === "" || categoryId.trim() === "" || price.trim() === "") {
+    return NextResponse.json({status:201, message: "No puede haber datos vacios"});
   }
-  const newProduct = await prisma.products.create({
-    data: {
-      name,
-      active,
-      price,
-      categoryId,
-    },
-  });
-  return NextResponse.json(newProduct);
+  if (isNaN(price)) {
+    return NextResponse.json({status:201, message: "El precio debe ser numerico"});
+  }
+  if (isNaN(categoryId)) {
+    return NextResponse.json({status:201, message: "La categoria es incorrecta"});
+  }
+  if (price <= 0) {
+    return NextResponse.json({status:201, message: "El precio debe ser un valor positivo superior a cero"});
+  }
+
+  try {
+    const newProduct = await prisma.products.create({
+      data: {
+        name,
+        price: parseFloat(price),
+        categoryId: parseInt(categoryId)
+      },
+    });
+
+    return NextResponse.json({data:newProduct, status:200, message:'Registro creado exitosamente!!'});
+
+  } catch (error) {
+    return NextResponse.json(error);
+  }
 }
