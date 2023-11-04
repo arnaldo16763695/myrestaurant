@@ -39,6 +39,13 @@ const ManagmentMenu = () => {
       sortable: true,
     },
   ];
+
+  const paginationComponentOptions = {
+    rowsPerPageText: 'Filas por página',
+    rangeSeparatorText: 'de',
+    selectAllRowsItem: true,
+    selectAllRowsItemText: 'Todos',
+};
   
   return (
     <>
@@ -47,6 +54,8 @@ const ManagmentMenu = () => {
         <DataTable
           columns={columns}
           data={products}
+          pagination
+          paginationComponentOptions={paginationComponentOptions}
         />
       </div>
 
