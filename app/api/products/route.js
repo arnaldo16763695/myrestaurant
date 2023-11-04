@@ -3,7 +3,17 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 
 export async function GET() {
-  const products = await prisma.products.findMany();
+  const products = await prisma.products.findMany({
+    select: {
+      name: true,
+      price: true,
+      category: {
+        select: {
+          name: true,
+        },
+      },
+    },
+  });
   // console.log(products)
   return NextResponse.json(products);
 }

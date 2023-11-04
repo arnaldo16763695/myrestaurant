@@ -29,21 +29,21 @@ const FormProduct = () => {
   const addProduct = async (e) => {
     e.preventDefault();
     
-    // if (form.name.trim()==="" || form.price.trim()==="" || form.categoryId.trim()==="") {
-    //   setMessageInput('Todos los campos son obligatorios')
-    //   setTimeout(()=>{setMessageInput('')},3000);
-    //   return;
-    // }
-    // if (isNaN(form.price)) {
-    //   setMessageInput('El precio debe ser numérico')
-    //   setTimeout(()=>{setMessageInput('')},3000);
-    //   return;
-    // }
-    // if (form.price <=0) {
-    //   setMessageInput('El precio debe ser mayor a cero')
-    //   setTimeout(()=>{setMessageInput('')},3000);
-    //   return;
-    // }
+    if (form.name.trim()==="" || form.price.trim()==="" || form.categoryId.trim()==="") {
+      setMessageInput('Todos los campos son obligatorios')
+      setTimeout(()=>{setMessageInput('')},3000);
+      return;
+    }
+    if (isNaN(form.price)) {
+      setMessageInput('El precio debe ser numérico')
+      setTimeout(()=>{setMessageInput('')},3000);
+      return;
+    }
+    if (form.price <=0) {
+      setMessageInput('El precio debe ser mayor a cero')
+      setTimeout(()=>{setMessageInput('')},3000);
+      return;
+    }
 
     try {
       const res = await fetch(`/api/products`, {
