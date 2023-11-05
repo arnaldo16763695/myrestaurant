@@ -7,7 +7,7 @@ const NavBarMenu = ({categs}) => {
   const pathname = usePathname();
   const param = useParams();
   return (
-    <nav className="flex justify-center gap-6   w-full p-6">
+    <nav className="flex justify-center flex-wrap gap-6 w-full p-6">
     {
       categs.map((categ)=>(
 
