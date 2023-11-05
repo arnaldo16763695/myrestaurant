@@ -19,7 +19,7 @@ const Page = async ({ params }) => {
         <div key={product.id} className="pl-1 flex hover:bg-slate-100">
           <div className="w-[90%] border"> ✔  {product.name}</div>
           
-          <div  className="w-[10%] border text-center">{product.price} $</div>
+          <div  className="lg:w-[10%] md:w-[20%] w-[30%]  border text-center">{product.price} $</div>
         </div>
         ))
       }

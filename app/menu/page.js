@@ -1,4 +1,4 @@
-import { prisma } from "@/app/lib/prisma"; 
+import { prisma } from "@/app/lib/prisma";
 
 
 const loadProducts = async () => {
@@ -8,34 +8,37 @@ const loadProducts = async () => {
 
   // return res.json();
 
-   return await prisma.products.findMany();
+  return await prisma.products.findMany();
 };
 
 export const revalidate = 60;
 const Menu = async () => {
-   const data = await loadProducts();
-   console.log(data);
-   
-   
+  const data = await loadProducts();
+  console.log(data);
+
+
   return (
-    <div className="">
+    <>
       <h1 className="p-4 text-center">Bienvenidos al Menú</h1>
-      <div className="flex flex-col items-center">
-        
-        {data.map((product, index)=>(
-        
-            <div key={product.id} className="grid gap-2  grid-cols-3 w-[80%] ">
-             <div className=" ">{product.name}</div>
-              <div className="  text-center">----------------------------------------</div>
-              <div className=" marker:font-bold text-lg text-center">{product.price} <span className="font-normal">$</span></div> 
-            </div>
-              
-           
-        
+      <div className="flex flex-col justify-center border w-[80%] lg:w-[60%] mx-auto ">
+
+        {data.map((product, index) => (
+
+
+
+          <div key={product.id} className="pl-1 flex hover:bg-slate-100">
+            <div className="w-[90%] border"> ✔  {product.name}</div>
+
+            <div className="lg:w-[10%] md:w-[20%] w-[30%]  border text-center">{product.price} <span className="font-normal">$</span></div>
+          </div>
+
+
+
+
         ))}
       </div>
-     
-    </div>
+
+    </>
   );
 };
 
