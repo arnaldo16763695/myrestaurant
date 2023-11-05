@@ -13,16 +13,22 @@ export async function GET() {
 }
 
 export async function POST(request) {
-  const { name, active } = await request.json();
-  if (name.trim() === "") {
-    return NextResponse.json("no puede haber datos vacios");
+  const { name } = await request.json();
+  if (name.trim() === "" ) {
+    return NextResponse.json({ status: 201, message: "No puede haber campos vacíos" });
   }
-  const newCategory = await prisma.categories.create({
-    data: {
-      name,
-      active,
-      
-    },
-  });
-  return NextResponse.json(newCategory);
+
+  try {
+    const newCategory = await prisma.categories.create({
+      data: {
+        name,
+      },
+    });
+
+    return NextResponse.json({ data: newCategory, status: 200, message: 'Registro creado exitosamente!!' });
+
+  } catch (error) {
+    return NextResponse.json(error);
+  }
+
 }

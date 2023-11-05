@@ -16,25 +16,25 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
       onChange={onFilter}
       className='block w-[25%] rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
     />
-    <button type="button" className='border text-white rounded-md px-2 py-2 ml-1 bg-[#0e2439]' onClick={onClear}>
+    <button type="button" className='ml-1 text-white rounded-md px-2 py-2 bg-[#0e2439]' onClick={onClear}>
       <AiOutlineClear />
     </button>
   </>
 );
 
-const ManagmentMenu = () => {
-  const [products, setProducts] = useState([]);
+const Categories = () => {
+  const [loader, setLoader] = useState(false)
+  const [categories, setCategories] = useState([]);
   const [filterText, setFilterText] = useState('');
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
-  const [loader, setLoader] = useState(false)
 
-  const getProducts = async () => {
+  const getCategories = async () => {
     setLoader(true)
     try {
-      const res = await fetch('/api/products');
+      const res = await fetch('/api/categories');
       const data = await res.json();
       // setProducts(data);
-      setProducts(data)
+      setCategories(data)
       console.log(data)
     } catch (error) {
       console.log(error)
@@ -42,33 +42,24 @@ const ManagmentMenu = () => {
       setLoader(false)
     }
   }
-  const filteredItems = products.filter(
+  const filteredItems = categories.filter(
     item => item.name && item.name.toLowerCase().includes(filterText.toLowerCase()),
   );
 
   useEffect(() => {
-    getProducts();
+    getCategories();
   }, [])
 
   const columns = [
     {
-      name: 'Producto',
+      name: 'Categoría',
       selector: row => row.name,
       sortable: true,
     },
-    {
-      name: 'Categoría',
-      selector: row => row.category.name,
-      sortable: true,
-    },
-    {
-      name: 'Precio',
-      selector: row => `${row.price} $. `,
-      sortable: true,
-    },
+
     {
       name: 'Acción',
-      selector: row => <div className='flex gap-5'><Link href={`/managment/products/edit/${row.id}`} title='Editar'><AiFillEdit className='text-lg' /></Link> <Link href={''} title='Eliminar'><AiFillDelete className='text-lg' /></Link></div>,
+      selector: row => <div className='flex gap-5'><Link title='Editar' href={`/managment/categories/edit/${row.id}`}><AiFillEdit className='text-lg' /></Link> <Link title='Eliminar' href={''}><AiFillDelete className='text-lg' /></Link></div>,
 
     },
   ];
@@ -95,10 +86,10 @@ const ManagmentMenu = () => {
 
   return (
     <>
-      <h1 className="p-4 text-center font-bold">Productos</h1>
-      <div className="flex flex-col items-center w-[70%] mx-auto">
+      <h1 className="p-4 text-center font-bold">Categorías</h1>
+      <div className="flex flex-col items-center w-[60%] mx-auto">
         <div className="lg:flex flex justify-between lg:justify-start w-full">
-          <Link href={`/managment/products/add`} className=" text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nuevo Producto</Link>
+          <Link href={`/managment/categories/add`} className=" text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nueva categoría</Link>
 
         </div>
         {/* <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} /> */}
@@ -122,4 +113,4 @@ const ManagmentMenu = () => {
   )
 }
 
-export default ManagmentMenu
+export default Categories

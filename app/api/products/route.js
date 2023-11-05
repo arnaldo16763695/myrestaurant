@@ -5,6 +5,7 @@ import { prisma } from "@/app/lib/prisma";
 export async function GET() {
   const products = await prisma.products.findMany({
     select: {
+      id: true,
       name: true,
       price: true,
       category: {
@@ -20,7 +21,7 @@ export async function GET() {
 
 export async function POST(request) {
   const { name, price, categoryId } = await request.json();
-  console.log(name, price, categoryId)
+  
   if (name.trim() === "" || categoryId.trim() === "" || price.trim() === "") {
     return NextResponse.json({status:201, message: "No puede haber datos vacios"});
   }
