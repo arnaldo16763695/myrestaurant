@@ -14,7 +14,7 @@ const FilterComponent = ({ filterText, onFilter, onClear }) => (
       aria-label="Search Input"
       value={filterText}
       onChange={onFilter}
-      className='block w-[25%] rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+      className='block lg:w-[25%] w-[80%] rounded-md border-0 py-1.5 pl-2 pr-2 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
     />
     <button type="button" className='ml-1 text-white rounded-md px-2 py-2 bg-[#0e2439]' onClick={onClear}>
       <AiOutlineClear />
@@ -86,11 +86,11 @@ const Categories = () => {
 
   return (
     <>
-      <h1 className="p-4 text-center font-bold">Categorías</h1>
+      <h1 className="p-1  text-center font-bold">Categorías</h1>
       <div className="flex flex-col items-center w-[60%] mx-auto">
         <div className="lg:flex flex justify-between lg:justify-start w-full">
-          <Link href={`/managment/categories/add`} className=" text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nueva categoría</Link>
-
+          <Link href={`/managment/categories/add`} className="lg:block md:block hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nuevo Producto</Link>
+          <Link href={`/managment/categories/add`} className="lg:hidden md:hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nuevo</Link>
         </div>
         {/* <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} /> */}
         {
