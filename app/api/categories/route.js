@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { prisma } from "../../lib/prisma";
+import { revalidatePath } from 'next/cache';
 
 export async function GET() {
   try {
@@ -24,7 +25,8 @@ export async function POST(request) {
         name,
       },
     });
-
+    revalidatePath('/api/categories');
+    
     return NextResponse.json({ data: newCategory, status: 200, message: 'Registro creado exitosamente!!' });
 
   } catch (error) {

@@ -109,7 +109,7 @@ const Categories = () => {
       <h1 className="p-1  text-center font-bold">Categorías</h1>
       <div className="flex flex-col items-center lg:w-[70%] w-full mx-2 lg:mx-auto">
         <div className="lg:flex flex justify-between lg:justify-start w-full">
-          <Link href={`/managment/categories/add`} className="lg:block md:block hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nuevo Producto</Link>
+          <Link href={`/managment/categories/add`} className="lg:block md:block hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nuevo Categoría</Link>
 
         </div>
         {/* <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} /> */}
