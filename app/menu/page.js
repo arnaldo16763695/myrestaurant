@@ -19,7 +19,7 @@ const Menu = async () => {
 
   return (
     <>
-      <h1 className="p-4 text-center">Bienvenidos al Menú</h1>
+      
       <div className="flex flex-col justify-center border w-[80%] lg:w-[60%] mx-auto ">
 
         {data.map((product, index) => (

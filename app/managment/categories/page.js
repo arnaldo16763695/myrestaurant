@@ -1,6 +1,7 @@
 'use client'
 import { Loader } from '@/app/components/Loader';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { AiFillDelete, AiFillEdit, AiOutlineClear } from "react-icons/ai";
@@ -27,6 +28,7 @@ const Categories = () => {
   const [categories, setCategories] = useState([]);
   const [filterText, setFilterText] = useState('');
   const [resetPaginationToggle, setResetPaginationToggle] = useState(false);
+  const router = useRouter();
 
   const getCategories = async () => {
     setLoader(true)
@@ -50,6 +52,22 @@ const Categories = () => {
     getCategories();
   }, [])
 
+ 
+    const deleteCategory = async (idCat) => {
+      // alert(idCat)
+      try {
+        const res = await fetch(`/api/categories/${idCat}`, {
+          method: "DELETE"
+        });
+        const deleted = await res.json();
+         router.push('/managment/categories')
+      } catch (error) {
+        console.log(error)
+      }
+
+    }
+
+ 
   const columns = [
     {
       name: 'Categoría',
@@ -58,8 +76,7 @@ const Categories = () => {
     },
 
     {
-      name: 'Acción',
-      selector: row => <div className='flex gap-5'><Link title='Editar' href={`/managment/categories/edit/${row.id}`}><AiFillEdit className='text-lg' /></Link> <Link title='Eliminar' href={''}><AiFillDelete className='text-lg' /></Link></div>,
+      name: 'Acción', selector: row => <div className='flex gap-5'><Link title='Editar' href={`/managment/categories/edit/${row.id}`}><AiFillEdit className='text-lg' /></Link> <button title='Eliminar' onClick={() => { deleteCategory(row.id) }}><AiFillDelete className='text-lg' /></button></div>,
 
     },
   ];
@@ -80,10 +97,10 @@ const Categories = () => {
     };
 
     return (
-     <>
-       <Link href={`/managment/categories/add`} className="lg:hidden md:hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439] mr-1">Nuevo</Link>
-       <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
-     </>
+      <>
+        <Link href={`/managment/categories/add`} className="lg:hidden md:hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439] mr-1">Nuevo</Link>
+        <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} />
+      </>
     );
   }, [filterText, resetPaginationToggle]);
 
@@ -93,7 +110,7 @@ const Categories = () => {
       <div className="flex flex-col items-center lg:w-[70%] w-full mx-2 lg:mx-auto">
         <div className="lg:flex flex justify-between lg:justify-start w-full">
           <Link href={`/managment/categories/add`} className="lg:block md:block hidden text-white hover:bg-gray-700 border-slate-600 rounded-md p-2 text-sm bg-[#0e2439]">Nuevo Producto</Link>
-          
+
         </div>
         {/* <FilterComponent onFilter={e => setFilterText(e.target.value)} onClear={handleClear} filterText={filterText} /> */}
         {

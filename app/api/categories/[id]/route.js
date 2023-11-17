@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
         },
         select: {
             id: true,
-            name: true,            
+            name: true,
         },
     })
 
@@ -24,20 +24,20 @@ export async function GET(request, { params }) {
 export async function POST(request) {
     const { id, name } = await request.json();
     const myId = parseInt(id)
-    if ( name.trim() === "" ) {
+    if (name.trim() === "") {
         return NextResponse.json({ status: 201, message: "No puede haber datos vacios" });
     }
-    
-    
+
+
     try {
         const Newcategory = await prisma.categories.update({
             where: {
                 id: myId
             },
             data: {
-                name,      
-               
-              },
+                name,
+
+            },
         });
 
         return NextResponse.json({ data: Newcategory, status: 200, message: 'Registro editado exitosamente!!' });
@@ -45,4 +45,18 @@ export async function POST(request) {
     } catch (error) {
         return NextResponse.json(error);
     }
+}
+
+export async function DELETE(request, { params }) {
+    const id = parseInt(params.id)
+    const categ = await prisma.categories.delete({
+        where: {
+            id: id,
+        },      
+    })
+
+    console.log(request.url,categ)
+
+    // return NextResponse.json({data: product, status:200})
+    return NextResponse.json(categ);
 }
